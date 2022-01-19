@@ -48,32 +48,49 @@ const RegisterForm = (props) => {
                         passwordIsValid &&
                         password2IsValid;
 
+    const submitHandler = async (event) => {
+        event.preventDefault();
+
+        const enteredEmail = emailValue;
+        const enteredUsername = usernameValue;
+        const enteredPassword = passwordValue;
+
+        if (props.isLogin) {
+            
+        } else {
+            const response = await fetch(
+                'http://192.168.0.66:8000/api/user/create/',
+                {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        email: enteredEmail,
+                        password: enteredPassword,
+                        name: enteredUsername
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                }
+            );
+            if (response.ok) {
+                emailReset();
+                usernameReset();
+                passwordReset();
+                password2Reset();
+            } else {
+                const error = await response.json();
+                const errorTexts = Object.entries(error).map(text => text[1]);
+                console.log(errorTexts);
+                setValidationErrors(errorTexts);
+            }  
+        }
+    }
+
     const usernameFeedback = 'Username is too short.';
     const emailFeedback = 'Provide a valid e-mail.';
     const passwordFeedback = 'Password must be at least 5 characters long and must not have white spaces.';
     const password2Feedback = 'Passwords are not equals';
-
-    const submitHandler = (event) => {
-        const tmpEmail = emailValue;
-        const tmpUser = usernameValue;
-        const tmpPass = passwordValue;
-
-        const payload = {
-            email: tmpEmail,
-            password: tmpPass,
-            name: tmpUser
-        }
-
-        const resetInputs = () => {
-            emailReset();
-            usernameReset();
-            passwordReset();
-            password2Reset();
-            setValidationErrors(null);
-        }
-        
-        props.onSubmit(event, payload, resetInputs, setValidationErrors);
-    }
 
     return (
         <form onSubmit={submitHandler}>
@@ -114,7 +131,7 @@ const RegisterForm = (props) => {
                 onBlur={password2BlurHandler}
                 onChange={password2ChangeHandler}/>
             <Button type='submit' value='SIGN UP' disabled={!formIsValid}/>
-            {validationErrors.length > 0 && validationErrors.map(text => <p key={text}>{text}</p>)}
+            {validationErrors.length > 0 && validationErrors.map(text => <p>{text}</p>)}
             <p><span className="cursor-pointer" onClick={props.onClick}>Already have an account? Sign in here.</span></p>
         </form>
     )
