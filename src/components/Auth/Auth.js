@@ -1,15 +1,13 @@
-import { useState, useRef} from "react";
+import { useState } from "react";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 
 
 
 const Auth = () => {
-    const [isLogin, setIsLogin] = useState(false);
     const [formType, setFormType] = useState(true);
 
-    const submitHandler = async (event, payload, successFn, setErrors) => {
-        event.preventDefault();
+    const submitHandler = async (payload, successFn, setErrors) => {
     
             const response = await fetch(
                 'http://192.168.0.66:8000/api/user/create/',
@@ -37,7 +35,7 @@ const Auth = () => {
 
     return (
         <div>
-            { formType && <LoginForm onClick={changeFormTypeHandler} isLogin={isLogin}/> }
+            { formType && <LoginForm onClick={changeFormTypeHandler} onSubmit={submitHandler}/> }
             { !formType && <RegisterForm onClick={changeFormTypeHandler} onSubmit={submitHandler}/> }
         </div>
     )

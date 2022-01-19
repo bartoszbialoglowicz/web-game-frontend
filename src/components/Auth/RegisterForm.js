@@ -54,6 +54,8 @@ const RegisterForm = (props) => {
     const password2Feedback = 'Passwords are not equals';
 
     const submitHandler = (event) => {
+        event.preventDefault();
+        
         const tmpEmail = emailValue;
         const tmpUser = usernameValue;
         const tmpPass = passwordValue;
@@ -72,7 +74,7 @@ const RegisterForm = (props) => {
             setValidationErrors(null);
         }
         
-        props.onSubmit(event, payload, resetInputs, setValidationErrors);
+        props.onSubmit(payload, resetInputs, setValidationErrors);
     }
 
     return (
