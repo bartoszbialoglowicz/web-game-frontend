@@ -1,6 +1,6 @@
 const Button = (props) => {
     return (
-        <button type={props.type}>{props.value}</button>
+        <button type={props.type} disabled={props.disabled}>{props.value}</button>
     )
 };
 
