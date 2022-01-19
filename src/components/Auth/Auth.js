@@ -1,8 +1,9 @@
-import { useState, Fragment} from "react";
+import { useState, useRef} from "react";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 
 const Auth = () => {
+    const [isLogin, setIsLogin] = useState(false);
     const [formType, setFormType] = useState(true);
 
     const changeFormTypeHandler = () => {
@@ -11,7 +12,7 @@ const Auth = () => {
 
     return (
         <div>
-            { formType && <LoginForm onClick={changeFormTypeHandler}/> }
+            { formType && <LoginForm onClick={changeFormTypeHandler} isLogin={isLogin}/> }
             { !formType && <RegisterForm onClick={changeFormTypeHandler}/> }
         </div>
     )
