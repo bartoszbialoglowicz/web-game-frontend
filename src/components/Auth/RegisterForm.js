@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Button from "../UI/Button";
 import Input from "./Input";
 import useInput from '../../hooks/use-input';
+import Errors from './Errors';
 
 const RegisterForm = (props) => { 
     const [validationErrors, setValidationErrors] = useState([]);
@@ -55,7 +56,7 @@ const RegisterForm = (props) => {
 
     const submitHandler = (event) => {
         event.preventDefault();
-        
+
         const tmpEmail = emailValue;
         const tmpUser = usernameValue;
         const tmpPass = passwordValue;
@@ -65,16 +66,19 @@ const RegisterForm = (props) => {
             password: tmpPass,
             name: tmpUser
         }
-
-        const resetInputs = () => {
-            emailReset();
-            usernameReset();
-            passwordReset();
-            password2Reset();
-            setValidationErrors(null);
+        const resetInputs = (arg) => {
+            arg = null; 
+        }
+        const setErrors = async (response) => {
+            const error = await response.json();
+            const errorTexts = Object.entries(error).map(text => text[1]);
+            console.log(errorTexts);
+            setValidationErrors(errorTexts);
         }
         
-        props.onSubmit(payload, resetInputs, setValidationErrors);
+        const url = 'http://192.168.0.66:8000/api/user/create/';
+
+        props.onSubmit(url, payload, resetInputs, setErrors);
     }
 
     return (
@@ -116,7 +120,8 @@ const RegisterForm = (props) => {
                 onBlur={password2BlurHandler}
                 onChange={password2ChangeHandler}/>
             <Button type='submit' value='SIGN UP' disabled={!formIsValid}/>
-            {validationErrors.length > 0 && validationErrors.map(text => <p key={text}>{text}</p>)}
+            {/* {validationErrors.length > 0 && validationErrors.map(text => <p key={text}>{text}</p>)} */}
+            <Errors validationErrors={validationErrors} />
             <p><span className="cursor-pointer" onClick={props.onClick}>Already have an account? Sign in here.</span></p>
         </form>
     )

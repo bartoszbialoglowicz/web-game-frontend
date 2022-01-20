@@ -7,10 +7,10 @@ import RegisterForm from "./RegisterForm";
 const Auth = () => {
     const [formType, setFormType] = useState(true);
 
-    const submitHandler = async (payload, successFn, setErrors) => {
+    const submitHandler = async (url, payload, successFn, setErrors=null) => {
     
             const response = await fetch(
-                'http://192.168.0.66:8000/api/user/create/',
+                url,
                 {
                     method: 'POST',
                     body: JSON.stringify(payload),
@@ -21,12 +21,10 @@ const Auth = () => {
                 }
             );
             if (response.ok) {
-                successFn();
+                successFn(response);
             } else {
-                const error = await response.json();
-                const errorTexts = Object.entries(error).map(text => text[1]);
-                setErrors(errorTexts);
-            }  
+                setErrors(response);
+            }
         }
 
     const changeFormTypeHandler = () => {
