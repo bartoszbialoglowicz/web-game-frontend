@@ -8,7 +8,7 @@ const AuthPage = () => {
     const isLoggedIn = authCtx.isLoggedIn;
 
     if (isLoggedIn) {
-        return <Navigate to='/home' />
+        return <Navigate to='/' />
     }
     
     return <Auth />
