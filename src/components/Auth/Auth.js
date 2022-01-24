@@ -35,7 +35,7 @@ const Auth = () => {
         <div>
             { formType && <LoginForm onClick={changeFormTypeHandler} onSubmit={submitHandler}/> }
             { !formType && <RegisterForm onClick={changeFormTypeHandler} onSubmit={submitHandler}/> }
-        </div>
+         </div>
     )
 }
 

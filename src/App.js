@@ -1,13 +1,25 @@
-import Auth from "./components/Auth/Auth";
-import { AuthContextProvider } from "./store/auth-context";
+import { useContext } from 'react';
+import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
+
+import Header from './components/Layout/Header';
+import AuthPage from './pages/AuthPage';
+import AuthContext from './store/auth-context';
 
 function App() {
+  const authCtx = useContext(AuthContext);
+
+  const isLoggedIn = authCtx.isLoggedIn;
   return (
-    <AuthContextProvider>
       <div className="App">
-        <Auth />
+        <Router>
+          <Routes>
+            <Route path='/auth' element={<AuthPage/>}>
+            </Route>
+            <Route path='/home' element={<Header />}>
+            </Route>
+          </Routes>
+        </Router>
       </div>
-    </AuthContextProvider>
   );
 }
 
