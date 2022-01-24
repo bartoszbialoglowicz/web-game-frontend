@@ -5,7 +5,6 @@ import { useContext } from "react";
 import AuthContext from "../../store/auth-context";
 import Errors from "./Errors";
 import { useState } from "react/cjs/react.development";
-import { Link } from "react-router-dom";
 
 const LoginForm = (props) => {
     const [validationErrors, setValidationErrors] = useState([]);
@@ -35,15 +34,13 @@ const LoginForm = (props) => {
         
         const url = 'http://192.168.0.66:8000/api/user/token/';
         const login = async (data) => {
-            const token = await data.json();
-            authContext.login(token);
-            console.log(authContext.token);
+            const res = await data.json();
+            authContext.login(res);
         }
 
         const setErrors = async (response) => {
             const error = await response.json();
             const errorTexts = Object.entries(error).map(text => text[1]);
-            console.log(errorTexts);
             setValidationErrors(errorTexts);
         }
 
