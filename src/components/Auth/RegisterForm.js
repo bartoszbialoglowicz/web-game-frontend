@@ -67,12 +67,13 @@ const RegisterForm = (props) => {
             name: tmpUser
         }
         const resetInputs = (arg) => {
-            arg = null; 
+            arg = null;
+            // Change to login form
+            props.onChange(); 
         }
         const setErrors = async (response) => {
             const error = await response.json();
             const errorTexts = Object.entries(error).map(text => text[1]);
-            console.log(errorTexts);
             setValidationErrors(errorTexts);
         }
         

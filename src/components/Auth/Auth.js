@@ -34,7 +34,7 @@ const Auth = () => {
     return (
         <div>
             { formType && <LoginForm onClick={changeFormTypeHandler} onSubmit={submitHandler}/> }
-            { !formType && <RegisterForm onClick={changeFormTypeHandler} onSubmit={submitHandler}/> }
+            { !formType && <RegisterForm onChange={changeFormTypeHandler} onSubmit={submitHandler}/> }
          </div>
     )
 }

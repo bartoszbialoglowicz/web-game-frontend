@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { Navigate } from "react-router-dom";
-import Header from "../components/Layout/Header";
+import Layout from "../components/Layout/Layout";
 import AuthContext from "../store/auth-context"
 
 const HomePage = () => {
@@ -11,7 +11,7 @@ const HomePage = () => {
         return <Navigate to='/auth' />
     }
     
-    return <Header></Header>
+    return <Layout />
 }
 
 export default HomePage;
