@@ -4,9 +4,11 @@ import Button from "../UI/Button";
 import Input from "./Input";
 import useInput from '../../hooks/use-input';
 import Errors from './Errors';
+import useHttp from '../../hooks/use-http';
 
 const RegisterForm = (props) => { 
     const [validationErrors, setValidationErrors] = useState([]);
+    const {isLoading, error, sendRequest} = useHttp();
 
     const {
         value: usernameValue,
@@ -54,32 +56,39 @@ const RegisterForm = (props) => {
     const passwordFeedback = 'Password must be at least 5 characters long and must not have white spaces.';
     const password2Feedback = 'Passwords are not equals';
 
-    const submitHandler = (event) => {
+    const mapErrors = async (data) => {
+        return 
+    }
+
+    const submitHandler = async (event) => {
         event.preventDefault();
 
         const tmpEmail = emailValue;
         const tmpUser = usernameValue;
         const tmpPass = passwordValue;
 
-        const payload = {
+        const body = {
             email: tmpEmail,
             password: tmpPass,
             name: tmpUser
         }
-        const resetInputs = (arg) => {
-            arg = null;
-            // Change to login form
-            props.onChange(); 
+
+        const payload = {
+            type: 'POST'
         }
-        const setErrors = async (response) => {
-            const error = await response.json();
-            const errorTexts = Object.entries(error).map(text => text[1]);
+
+        const changeFormType = (arg) => {
+            arg = null;
+            props.onChange();
+        }
+        const setErrors = (response) => {
+            const errorTexts = Object.entries(response).map(text => text[1]);
             setValidationErrors(errorTexts);
         }
         
         const url = 'http://192.168.0.66:8000/api/user/create/';
 
-        props.onSubmit(url, payload, resetInputs, setErrors);
+        sendRequest(url, body, payload, changeFormType, setErrors);
     }
 
     return (
@@ -121,9 +130,8 @@ const RegisterForm = (props) => {
                 onBlur={password2BlurHandler}
                 onChange={password2ChangeHandler}/>
             <Button type='submit' value='SIGN UP' disabled={!formIsValid}/>
-            {/* {validationErrors.length > 0 && validationErrors.map(text => <p key={text}>{text}</p>)} */}
-            <Errors validationErrors={validationErrors} />
-            <p><span className="cursor-pointer" onClick={props.onClick}>Already have an account? Sign in here.</span></p>
+            {error && <Errors validationErrors={validationErrors} />}
+            <p><span className="cursor-pointer" onClick={props.onChange}>Already have an account? Sign in here.</span></p>
         </form>
     )
 };

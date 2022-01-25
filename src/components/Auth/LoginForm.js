@@ -5,10 +5,12 @@ import { useContext } from "react";
 import AuthContext from "../../store/auth-context";
 import Errors from "./Errors";
 import { useState } from "react/cjs/react.development";
+import useHttp from "../../hooks/use-http";
 
 const LoginForm = (props) => {
     const [validationErrors, setValidationErrors] = useState([]);
     const authContext = useContext(AuthContext);
+    const {error, sendRequest} = useHttp();
 
     const {
         value: emailValue,
@@ -22,29 +24,30 @@ const LoginForm = (props) => {
         inputBlurHandler: passwordBlurHandler
     } = useInput(value => value.trim().length === value.length && value.trim().length > 4);
 
-    const submitHandler = (event) => {
+    const submitHandler = async (event) => {
         event.preventDefault();
         
         const tmpEmail = emailValue;
         const tmpPass = passwordValue;
-        const payload = {
+        const body = {
             email: tmpEmail,
             password: tmpPass
         };
+        const payload = {
+            type: 'POST'
+        }
         
         const url = 'http://192.168.0.66:8000/api/user/token/';
-        const login = async (data) => {
-            const res = await data.json();
-            authContext.login(res);
+        const login = (data) => {
+            authContext.login(data);
         }
 
-        const setErrors = async (response) => {
-            const error = await response.json();
-            const errorTexts = Object.entries(error).map(text => text[1]);
+        const setErrors = (data) => {
+            const errorTexts = Object.entries(data).map(text => text[1]);
             setValidationErrors(errorTexts);
         }
 
-        props.onSubmit(url, payload, login, setErrors);
+        sendRequest(url, body, payload, login, setErrors);
     }
     
     return (
@@ -67,7 +70,7 @@ const LoginForm = (props) => {
                 onChange={passwordChangeHandler}    
             />
             <Button type='submit' value='SIGN IN' />
-            <Errors validationErrors={validationErrors}/>
+            {error && <Errors validationErrors={validationErrors}/>}
             <p><span className="cursor-pointer" onClick={props.onClick}>Don't have an account? Sign up for free.</span></p>
         </form>
     )

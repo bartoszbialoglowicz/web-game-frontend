@@ -1,73 +1,36 @@
 import { useCallback, useState } from "react";
 
 const useHttp = () => {
-    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     
-    const sendRequest = useCallback(async (url, type, token, fn) => {
-        setIsLoading(false);
-        setError(false);
-        const authToken = 'Token ' + token;
-        try {
+    const sendRequest = useCallback(async (url, requestBody, payload, fnSuccess, fnError) => {
+        setError(null);
+        const authToken = 'Token ' + payload.token;
+        
             const response = await fetch(url, {
-                method: type,
+                method: payload.type,
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'Authorization': authToken
-                }
+                    'Content-Type': payload.contentType ? payload.contentType : 'application/json',
+                    'Accept': payload.accept ? payload.accept : 'application/json',
+                    'Authorization': payload.token ? authToken : null
+                },
+                body: requestBody ? JSON.stringify(requestBody) : null
             });
 
-            if (!response.ok) {
-                throw new error('Request failed!');
-            }
-
             const data = await response.json();
-            fn(data);
-        } catch (err) {
-            setError(err.message || 'Something went wrong');
-        }
-        setIsLoading(false);
+
+            if (!response.ok) {
+                setError(data);
+                fnError(data);
+            } else {
+                fnSuccess(data);
+            }
     }, []);
     
     return {
-        isLoading,
         error,
         sendRequest
     }
 }
 
 export default useHttp;
-
-/* import { useState, useCallback } from 'react';
-
-const useHttp = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const sendRequest = useCallback(async (requestConfig, applyData) => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(requestConfig.url, {
-        method: requestConfig.method ? requestConfig.method : 'GET',
-        headers: requestConfig.headers ? requestConfig.headers : {},
-        body: requestConfig.body ? JSON.stringify(requestConfig.body) : null,
-      });
-
-      if (!response.ok) {
-        throw new Error('Request failed!');
-      }
-
-      const data = await response.json();
-      applyData(data);
-    } catch (err) {
-      setError(err.message || 'Something went wrong!');
-    }
-    setIsLoading(false);
-  }, []);
-
-  return sendRequest;
-};
-
-export default useHttp; */
