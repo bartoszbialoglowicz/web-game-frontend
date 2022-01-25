@@ -5,36 +5,50 @@ const AuthContext = React.createContext({
     data: {
         token: '',
         name: '',
-        email: ''
+        email: '',
+        gold: 0,
+        experience: 0,
+        lvl: 1
     },
     login: (data) => {},
     logout: () => {}
 });
 
 export const AuthContextProvider = (props) => {
-    const initialData = JSON.parse(localStorage.getItem('data'));
-    const [data, setData] = useState(initialData);
+    const tmp = localStorage.getItem('data') === null ? {
+        token: '',
+        name: '',
+        email: '',
+        gold: 0,
+        experience: 0,
+        lvl: 1
+    } : JSON.parse(localStorage.getItem('data'));
+    const [data, setData] = useState(tmp);
 
     const userIsLoggedIn = !!data.token;
 
     const loginHandler = (data) => {
-        setData({
+        const tmpObj = {
             token: data.token,
             name: data.user,
-            email: data.email
-        });
-        localStorage.setItem('data', JSON.stringify({
-            token: data.token,
-            name: data.user,
-            email: data.email
-        }));
+            email: data.email,
+            gold: data.gold,
+            experience: data.experience,
+            lvl: data.lvl
+        };
+        setData(tmpObj);
+        localStorage.setItem('data', JSON.stringify(tmpObj));
+        console.log(tmpObj);
     };
 
     const logoutHandler = () => {
         setData({
             token: null,
             name: '',
-            email: ''
+            email: '',
+            gold: 0,
+            experience: 0,
+            lvl: 1
         });
         localStorage.clear('data');
     }
