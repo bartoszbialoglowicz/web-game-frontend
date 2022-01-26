@@ -8,7 +8,7 @@ import useHttp from '../../hooks/use-http';
 
 const RegisterForm = (props) => { 
     const [validationErrors, setValidationErrors] = useState([]);
-    const {isLoading, error, sendRequest} = useHttp();
+    const {error, sendRequest} = useHttp();
 
     const {
         value: usernameValue,
@@ -16,7 +16,6 @@ const RegisterForm = (props) => {
         hasError: usernameHasError,
         valueChangeHandler: usernameChangeHandler,
         inputBlurHandler: usernameBlurHandler,
-        inputReset: usernameReset
     } = useInput(value => value.trim().length === value.length && value.trim().length > 4);
 
     const {
@@ -25,7 +24,6 @@ const RegisterForm = (props) => {
         hasError: emailHasError,
         valueChangeHandler: emailChangeHandler,
         inputBlurHandler: emailBlurHandler,
-        inputReset: emailReset
     } = useInput(value => value.toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/));
 
     const {
@@ -34,7 +32,6 @@ const RegisterForm = (props) => {
         hasError: passwwordHasError,
         valueChangeHandler: passwordChangeHandler,
         inputBlurHandler: passwordBlurHandler,
-        inputReset: passwordReset
     } = useInput(value => value.trim().length === value.length && value.trim().length > 4);
 
     const {
@@ -43,7 +40,6 @@ const RegisterForm = (props) => {
         hasError: passwword2HasError,
         valueChangeHandler: password2ChangeHandler,
         inputBlurHandler: password2BlurHandler,
-        inputReset: password2Reset
     } = useInput(value => value === passwordValue);
 
     const formIsValid = usernameIsValid && 
@@ -55,10 +51,6 @@ const RegisterForm = (props) => {
     const emailFeedback = 'Provide a valid e-mail.';
     const passwordFeedback = 'Password must be at least 5 characters long and must not have white spaces.';
     const password2Feedback = 'Passwords are not equals';
-
-    const mapErrors = async (data) => {
-        return 
-    }
 
     const submitHandler = async (event) => {
         event.preventDefault();

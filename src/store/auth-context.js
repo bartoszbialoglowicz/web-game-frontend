@@ -38,7 +38,6 @@ export const AuthContextProvider = (props) => {
         };
         setData(tmpObj);
         localStorage.setItem('data', JSON.stringify(tmpObj));
-        console.log(tmpObj);
     };
 
     const logoutHandler = () => {
