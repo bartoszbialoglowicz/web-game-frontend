@@ -1,6 +1,8 @@
+import styles from './Button.module.css';
+
 const Button = (props) => {
     return (
-        <button type={props.type} disabled={props.disabled}>{props.value}</button>
+        <button className={styles.formButton} type={props.type} disabled={props.disabled}>{props.value}</button>
     )
 };
 

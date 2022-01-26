@@ -1,22 +1,19 @@
-import { forwardRef } from "react";
 import styles from './Input.module.css';
 
-const Input = forwardRef((props, ref) => {
+const Input = (props) => {
 
-    const inputStyle = props.isValid ? styles.invalid : '';
     return (
         <div>
             <label htmlFor={props.name}>{props.label}</label>
-            <input className={inputStyle} 
-                    type={props.type} 
-                    name={props.name} 
-                    ref={ref}
+            <input  type={props.type} 
+                    name={props.name}
                     value={props.value}
                     onBlur={props.onBlur}
-                    onChange={props.onChange}/>
-            {props.isValid &&<p className={styles.invalid}>{props.feedback}</p>}
+                    onChange={props.onChange}
+                    autoComplete="off"/>
+            {props.isValid &&<span className={styles.invalid}>{props.feedback}</span>}
         </div>
     )
-});
+};
 
 export default Input;

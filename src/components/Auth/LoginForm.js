@@ -6,6 +6,7 @@ import AuthContext from "../../store/auth-context";
 import Errors from "./Errors";
 import { useState } from "react/cjs/react.development";
 import useHttp from "../../hooks/use-http";
+import './Form.css';
 
 const LoginForm = (props) => {
     const [validationErrors, setValidationErrors] = useState([]);
