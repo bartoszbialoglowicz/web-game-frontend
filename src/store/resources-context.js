@@ -18,7 +18,6 @@ export const ResourcesContextProvider = (props) => {
         const tmpChars = [];
         data.forEach(element => {
             tmpChars.push(element);
-            console.log(element);
         });
         setCharacters(tmpChars);
         localStorage.setItem('characters', JSON.stringify(tmpChars));
