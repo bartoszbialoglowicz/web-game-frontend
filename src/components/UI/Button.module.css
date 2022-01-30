@@ -7,6 +7,7 @@
     margin: 5%;
     transition: .2s;
     outline: none;
+    font-family: 'Playfair Display', serif;
 }
 
 .formButton:focus,
