@@ -24,10 +24,9 @@ const useRandomResource = () => {
 
     const getItems = (chances, resources, n) => {
         const tmpRes = [];
-
         for (let i = 0; i < n; i++) {
             let locked = false;
-            const rand = Math.floor(Math.random() * (100-1));
+            const rand = Math.floor(Math.random() * (100));
             const rarity = getRarity(rand, chances);
             const tierChamps = resources.filter(val => val.tier === rarity);
             const randIt = Math.floor(Math.random() * (tierChamps.length));
