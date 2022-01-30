@@ -10,6 +10,8 @@ import './Form.css';
 
 const LoginForm = (props) => {
     const [validationErrors, setValidationErrors] = useState([]);
+    const [emailValid, setEmailValid] = useState(null);
+    const [passwordValid, setPasswordValid] = useState(null);
     const authContext = useContext(AuthContext);
     const {error, sendRequest} = useHttp();
 
@@ -44,7 +46,13 @@ const LoginForm = (props) => {
         }
 
         const setErrors = (data) => {
-            const errorTexts = Object.entries(data).map(text => text[1]);
+            const errorTexts = [];
+            if (data.email) {
+                errorTexts.push(data.email);
+            }
+            if (data.password) {
+                errorTexts.push(data.password);
+            }
             setValidationErrors(errorTexts);
         }
 
