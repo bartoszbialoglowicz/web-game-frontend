@@ -15,9 +15,14 @@ input {
     background-color: transparent;
     width: 92%;
     color: #f0ebd8;
-    font-size: 14px;
+    font-size: 16px;
     outline: none;
     transition: .2s;
+    font-family: 'Playfair Display', serif;
+}
+
+span {
+    padding: 4%;
 }
 
 @keyframes flash {
