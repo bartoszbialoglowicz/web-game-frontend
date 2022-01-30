@@ -5,6 +5,7 @@ import Input from "./Input";
 import useInput from '../../hooks/use-input';
 import Errors from './Errors';
 import useHttp from '../../hooks/use-http';
+import { SERVER_URL } from '../../utils/Constant';
 
 const RegisterForm = (props) => { 
     const [validationErrors, setValidationErrors] = useState([]);
@@ -78,7 +79,7 @@ const RegisterForm = (props) => {
             setValidationErrors(errorTexts);
         }
         
-        const url = 'http://192.168.0.66:8000/api/user/create/';
+        const url = SERVER_URL + '/api/user/create/';
 
         sendRequest(url, body, payload, changeFormType, setErrors);
     }

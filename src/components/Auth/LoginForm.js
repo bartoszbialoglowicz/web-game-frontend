@@ -7,11 +7,10 @@ import Errors from "./Errors";
 import { useState } from "react/cjs/react.development";
 import useHttp from "../../hooks/use-http";
 import './Form.css';
+import { SERVER_URL } from "../../utils/Constant";
 
 const LoginForm = (props) => {
     const [validationErrors, setValidationErrors] = useState([]);
-    const [emailValid, setEmailValid] = useState(null);
-    const [passwordValid, setPasswordValid] = useState(null);
     const authContext = useContext(AuthContext);
     const {error, sendRequest} = useHttp();
 
@@ -40,7 +39,7 @@ const LoginForm = (props) => {
             type: 'POST'
         }
         
-        const url = 'http://192.168.0.66:8000/api/user/token/';
+        const url = SERVER_URL + 'api/user/token/';
         const login = (data) => {
             authContext.login(data);
         }

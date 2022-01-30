@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useContext } from 'react/cjs/react.development';
-import Button from '../../components/UI/Button';
 
 import useHttp from '../../hooks/use-http';
 import AuthContext from '../../store/auth-context';
 import useRandomResource from '../../hooks/use-random-resource';
 import ResourcesContext from '../../store/resources-context';
 import Chest from '../../components/Store/Chest';
+import { SERVER_URL } from '../../utils/Constant';
 
 const Packs = () => {
   const {error, sendRequest} = useHttp();
@@ -19,8 +19,8 @@ const Packs = () => {
   const getItems = useRandomResource();
 
   useEffect(() => {
-    const url = 'http://localhost:8000/api/resources/store/';
-    const url2 = 'http://localhost:8000/api/resources/characters/'
+    const url = SERVER_URL + '/resources/store/';
+    const url2 = SERVER_URL + '/api/resources/characters/'
     const payload = {
       type: 'GET',
       token: authCtx.data.token
@@ -30,7 +30,7 @@ const Packs = () => {
   }, [sendRequest, authCtx.data.token]);
 
   const sendRequestHandler = async (chances, quantity) => {
-    const url = `http://localhost:8000/api/resources/resourcesupdate/${authCtx.data.id}/`;
+    const url = SERVER_URL + `/api/resources/resourcesupdate/${authCtx.data.id}/`;
     const payload = {
       type: 'PATCH',
       token: authCtx.data.token
