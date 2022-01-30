@@ -5,7 +5,7 @@ import Header from "./Header";
 
 import Collection from "../../pages/Home/Collection";
 import Quests from '../../pages/Home/Quests';
-import Packs from "../../pages/Home/Packs";
+import Store from "../../pages/Home/Store";
 import Board from '../../pages/Home/Board';
 import useHttp from '../../hooks/use-http';
 import AuthContext from '../../store/auth-context';
@@ -42,7 +42,7 @@ const Layout = () => {
             <Routes>
                 <Route index element={<Board />}/>
                 <Route path='collection' element={<Collection />}/>
-                <Route path='packs' element={<Packs />}/>
+                <Route path='store' element={<Store />}/>
                 <Route path='quests' element={<Quests />}/>
             </Routes>
             <Footer />    

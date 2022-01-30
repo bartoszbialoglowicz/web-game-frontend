@@ -18,7 +18,7 @@ const Header = () => {
           <div>XP: {authCtx.data.experience}</div>
           <Link to={'/'}><div><p>Home</p></div></Link>
           <Link to={'quests'}><div><p>Quests</p></div></Link>
-          <Link to={'packs'}><div><p>Packs</p></div></Link>
+          <Link to={'store'}><div><p>Store</p></div></Link>
           <Link to={'collection'}><div><p>Collection</p></div></Link>
       </header>
   );
