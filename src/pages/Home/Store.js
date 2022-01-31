@@ -7,6 +7,7 @@ import useRandomResource from '../../hooks/use-random-resource';
 import ResourcesContext from '../../store/resources-context';
 import Chest from '../../components/Store/Chest';
 import { SERVER_URL } from '../../utils/Constant';
+import ItemList from '../../components/Collection/ItemList';
 
 const Packs = () => {
   const {error, sendRequest} = useHttp();
@@ -15,22 +16,22 @@ const Packs = () => {
   const [store, setStore] = useState([]); 
   const [champs, setChamps] = useState([]);
   const [errors, setErrors] = useState(null);
-
+  const [drop, setDrop] = useState([]);
   const getItems = useRandomResource();
 
   useEffect(() => {
-    const url = SERVER_URL + '/resources/store/';
-    const url2 = SERVER_URL + '/api/resources/characters/'
+    const url = SERVER_URL + 'api/resources/store/';
+    const url2 = SERVER_URL + 'api/resources/characters/'
     const payload = {
       type: 'GET',
       token: authCtx.data.token
     }
     sendRequest(url, null, payload, setStore, setErrors);
     sendRequest(url2, null, payload, setChamps, setErrors);
-  }, [sendRequest, authCtx.data.token]);
+  }, [sendRequest, authCtx.data]);
 
   const sendRequestHandler = async (chances, quantity) => {
-    const url = SERVER_URL + `/api/resources/resourcesupdate/${authCtx.data.id}/`;
+    const url = SERVER_URL + `api/resources/resourcesupdate/${authCtx.data.id}/`;
     const payload = {
       type: 'PATCH',
       token: authCtx.data.token
@@ -38,23 +39,25 @@ const Packs = () => {
     
     const ctxChars = resourceCtx.characters;
     const chestChars = getItems(chances, champs, quantity);
-
+    const dataToSend = resourceCtx.characters.map(item => item.id)
+                        .concat(chestChars.map(item => item.id));
     resourceCtx.addCharacters(chestChars);
 
     const body = {
-      characters: resourceCtx.characters,
+      characters: dataToSend,
       user: authCtx.data.id
     };
-    
+
     const er = (data) => {
       resourceCtx.setCharacters(ctxChars);
+      console.log(data);
     }
 
     const setChars = data => {
-      console.log('ok');
+      setDrop(chestChars);
     }
     sendRequest(url, body, payload, setChars, er);
-  }
+  };
 
   const storeItems = store.length > 0 ? 
     store.map(element => {
@@ -69,11 +72,14 @@ const Packs = () => {
   }) : 
     <p>Chests are not available</p>; 
 
+  const droppedItems = <ItemList list={drop} title="" />
+
   return <div>
     <p>Chests</p>
     <div>
       {error && errors}
       {!error && storeItems}
+      {drop.length > 0 && droppedItems}
     </div>
   </div>;
 };
