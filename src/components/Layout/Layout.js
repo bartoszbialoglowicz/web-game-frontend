@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, Fragment } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 
@@ -11,6 +11,8 @@ import useHttp from '../../hooks/use-http';
 import AuthContext from '../../store/auth-context';
 import ResourcesContext from '../../store/resources-context';
 import { useState } from "react/cjs/react.development";
+import Content from "./Content";
+import { SERVER_URL } from "../../utils/Constant";
 
 const Layout = () => {
     const [errors, setErrors] = useState(null);
@@ -32,21 +34,24 @@ const Layout = () => {
         const errors = (data) => {
             setErrors(data);
         }
-        sendRequest('http://localhost:8000/api/resources/userresources/', null, payload, setResources, errors);
+        const url = SERVER_URL + 'api/resources/userresources/';
+        sendRequest(url, null, payload, setResources, errors);
     }, []);
 
     return (
-        <header>
+        <Fragment>
             {errors && <p>Server error</p>}
             <Header />
-            <Routes>
-                <Route index element={<Board />}/>
-                <Route path='collection' element={<Collection />}/>
-                <Route path='store' element={<Store />}/>
-                <Route path='quests' element={<Quests />}/>
-            </Routes>
-            <Footer />    
-        </header>
+            <Content>
+                <Routes>
+                    <Route index element={<Board />}/>
+                    <Route path='collection' element={<Collection />}/>
+                    <Route path='store' element={<Store />}/>
+                    <Route path='quests' element={<Quests />}/>
+                </Routes>
+                <Footer />
+            </Content>
+        </Fragment>
     )
 }
 

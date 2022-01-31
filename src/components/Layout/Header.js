@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../store/auth-context';
 
+import classes from './Header.module.css';
+
 const Header = () => {
     const authCtx = useContext(AuthContext);
     
@@ -10,7 +12,7 @@ const Header = () => {
     }
 
     return (
-      <header>
+      <header className={classes.nav}>
           <div><p>{authCtx.data.name}</p></div>
           <div><p onClick={logoutHandler}>Sign Out</p></div>
           <div>Gold: {authCtx.data.gold}</div>
