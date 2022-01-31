@@ -8,6 +8,9 @@ import ResourcesContext from '../../store/resources-context';
 import Chest from '../../components/Store/Chest';
 import { SERVER_URL } from '../../utils/Constant';
 import ItemList from '../../components/Collection/ItemList';
+import Modal from '../../components/UI/Modal';
+import Item from '../../components/Collection/Item';
+import Button from '../../components/UI/Button';
 
 const Packs = () => {
   const {error, sendRequest} = useHttp();
@@ -16,6 +19,7 @@ const Packs = () => {
   const [store, setStore] = useState([]); 
   const [champs, setChamps] = useState([]);
   const [errors, setErrors] = useState(null);
+  const [showOverlay, setShowOverlay] = useState(false);
   const [drop, setDrop] = useState([]);
   const getItems = useRandomResource();
 
@@ -29,6 +33,13 @@ const Packs = () => {
     sendRequest(url, null, payload, setStore, setErrors);
     sendRequest(url2, null, payload, setChamps, setErrors);
   }, [sendRequest, authCtx.data]);
+
+  const showOverlayHandler = (event) => {
+    if (event !== null) {
+      event.preventDefault();
+    }
+    setShowOverlay(!showOverlay);
+  }
 
   const sendRequestHandler = async (chances, quantity) => {
     const url = SERVER_URL + `api/resources/resourcesupdate/${authCtx.data.id}/`;
@@ -55,6 +66,7 @@ const Packs = () => {
 
     const setChars = data => {
       setDrop(chestChars);
+      showOverlayHandler(null);
     }
     sendRequest(url, body, payload, setChars, er);
   };
@@ -72,14 +84,14 @@ const Packs = () => {
   }) : 
     <p>Chests are not available</p>; 
 
-  const droppedItems = <ItemList list={drop} title="" />
+  const droppedItems = <Modal onClose={showOverlayHandler}>{drop.map(el => <Item item={el} key={el.id}/>)}<form onSubmit={showOverlayHandler}><Button value="CLOSE"/></form></Modal>
 
   return <div>
     <p>Chests</p>
     <div>
       {error && errors}
       {!error && storeItems}
-      {drop.length > 0 && droppedItems}
+      {drop.length && showOverlay > 0 && droppedItems}
     </div>
   </div>;
 };
