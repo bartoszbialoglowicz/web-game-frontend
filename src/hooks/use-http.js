@@ -16,9 +16,7 @@ const useHttp = () => {
                 },
                 body: requestBody ? JSON.stringify(requestBody) : null
             });
-
             const data = await response.json();
-
             if (!response.ok) {
                 setError(data);
                 fnError(data);

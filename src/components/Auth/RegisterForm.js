@@ -79,7 +79,7 @@ const RegisterForm = (props) => {
             setValidationErrors(errorTexts);
         }
         
-        const url = SERVER_URL + '/api/user/create/';
+        const url = SERVER_URL + 'api/user/create/';
 
         sendRequest(url, body, payload, changeFormType, setErrors);
     }
