@@ -1,0 +1,8 @@
+.list-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+} .list-item > h1 {
+    width: 100%;
+    text-align: center;
+}
