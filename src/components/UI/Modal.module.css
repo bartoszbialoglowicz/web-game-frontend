@@ -47,12 +47,14 @@
 
   @keyframes lifting {
     0% {
+      z-index: 32;
       background-size: 400%;
       background-position: 0%;
       background-repeat: no-repeat;
       background-image: linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.4) 50%, transparent 75%);
     }
     100% {
+      z-index: 32;
       background-size: 400%;
       background-position: 200%;
       background-repeat: no-repeat;
