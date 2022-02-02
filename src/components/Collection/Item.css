@@ -6,7 +6,7 @@
     position: relative;
     transition: .2s;
     border-radius: 5px;
-    margin: 20px 0;
+    margin: 20px 10px;
 } 
 .item:hover .stats{
     top: 0%;

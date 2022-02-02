@@ -1,0 +1,9 @@
+footer {
+    width: 100%;
+}
+
+footer a {
+    font-weight: 500;
+    text-decoration: none;
+    color: #cab884;
+}
