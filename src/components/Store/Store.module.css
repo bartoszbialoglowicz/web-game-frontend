@@ -1,0 +1,11 @@
+.store {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.store h2 {
+    width: 100%;
+    text-align: center;
+}
