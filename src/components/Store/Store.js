@@ -59,16 +59,21 @@ const Store = () => {
       user: authCtx.data.id
     };
 
+    /* Function return true or false (in case if response is invalid)
+       That prevents taking gold from user if there are some response errors */
+    let takeGold = null;
     const er = (data) => {
       resourceCtx.setCharacters(ctxChars);
-      console.log(data);
+      takeGold = false;
     }
 
     const setChars = data => {
       setDrop(chestChars);
       showOverlayHandler(null);
+      takeGold = true;
     }
-    sendRequest(url, body, payload, setChars, er);
+    await sendRequest(url, body, payload, setChars, er);
+    return takeGold;
   };
 
   const storeItems = store.length > 0 ? 
