@@ -21,8 +21,12 @@ const Layout = () => {
     const {error, sendRequest} = useHttp();
 
     const setResources = (data) => {
+        console.log(data);
         resourcesCtx.setCharacters(data[0].characters);
         resourcesCtx.setItems(data[0].items);
+        resourcesCtx.setGold(data[0].gold);
+        resourcesCtx.setExperience(data[0].experience);
+        resourcesCtx.setLvl(data[0].lvl);
     }
 
     useEffect(() => {

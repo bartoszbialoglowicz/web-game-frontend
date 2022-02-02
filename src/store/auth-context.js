@@ -6,9 +6,6 @@ const AuthContext = React.createContext({
         token: '',
         name: '',
         email: '',
-        gold: 0,
-        experience: 0,
-        lvl: 1,
         id: null
     },
     login: (data) => {},
@@ -20,9 +17,6 @@ export const AuthContextProvider = (props) => {
         token: '',
         name: '',
         email: '',
-        gold: 0,
-        experience: 0,
-        lvl: 1,
         id: null
     } : JSON.parse(localStorage.getItem('data'));
     const [data, setData] = useState(tmp);
@@ -34,9 +28,6 @@ export const AuthContextProvider = (props) => {
             token: data.token,
             name: data.user,
             email: data.email,
-            gold: data.gold,
-            experience: data.experience,
-            lvl: data.lvl,
             id: data.id
         };
         setData(tmpObj);
@@ -48,9 +39,6 @@ export const AuthContextProvider = (props) => {
             token: null,
             name: '',
             email: '',
-            gold: 0,
-            experience: 0,
-            lvl: 1,
             id: null
         });
         localStorage.clear('data');

@@ -12,10 +12,12 @@ import home from '../../assets/icons/tent.png';
 import quests from '../../assets/icons/certificate.png';
 import store from '../../assets/icons/treasure.png';
 import collection from '../../assets/icons/card-game.png';
+import ResourcesContext from '../../store/resources-context';
 
 const Header = () => {
     const [isHiden, setIsHiden] = useState(false);
     const authCtx = useContext(AuthContext);
+    const resourcesCtx = useContext(ResourcesContext);
 
     let hideClass = isHiden ? classes.hidden : '';
 
@@ -36,9 +38,9 @@ const Header = () => {
                     </div>
                     <ul>
                         <li><p>Welcome, {authCtx.data.name}</p>
-                        <p>Gold: {authCtx.data.gold}</p>
-                        <p>LVL: {authCtx.data.lvl}</p>
-                        <p>XP: {authCtx.data.experience}</p></li>
+                        <p>Gold: {resourcesCtx.gold}</p>
+                        <p>LVL: {resourcesCtx.lvl}</p>
+                        <p>XP: {resourcesCtx.experience}</p></li>
                         <li><img src={home} alt='home' /><Link to={'/'}>Home</Link></li>
                         <li><img src={quests} alt='quests' /><Link to={'quests'}>Quests</Link></li>
                         <li><img src={store} alt='store' /><Link to={'store'}>Store</Link></li>
