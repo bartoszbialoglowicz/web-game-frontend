@@ -6,7 +6,7 @@ import AuthContext from "../../store/auth-context";
 import Errors from "./Errors";
 import { useState } from "react/cjs/react.development";
 import useHttp from "../../hooks/use-http";
-import './Form.css';
+import classes from './Form.module.css';
 import { SERVER_URL } from "../../utils/Constant";
 
 const LoginForm = (props) => {
@@ -59,7 +59,7 @@ const LoginForm = (props) => {
     }
     
     return (
-        <form onSubmit={submitHandler}>
+        <form onSubmit={submitHandler} className={classes.form}>
             <h2>LOGIN</h2>
             <Input 
                 type='text' 

@@ -7,6 +7,8 @@ import Errors from './Errors';
 import useHttp from '../../hooks/use-http';
 import { SERVER_URL } from '../../utils/Constant';
 
+import classes from './Form.module.css';
+
 const RegisterForm = (props) => { 
     const [validationErrors, setValidationErrors] = useState([]);
     const {error, sendRequest} = useHttp();
@@ -85,7 +87,7 @@ const RegisterForm = (props) => {
     }
 
     return (
-        <form onSubmit={submitHandler}>
+        <form onSubmit={submitHandler} className={classes.form}>
             <h2>SIGN UP</h2>
             <Input 
                 isValid={usernameHasError

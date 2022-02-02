@@ -1,20 +1,20 @@
-form {
+.form {
     padding: 1em;
     border: 1px solid #f0ebd8;
     width: 400px;
 }
 @media (max-width: 600px) {
-    form {
+    .form {
         width: 100%;
         border: none;
     }
 }
 
-form div {
+.form div {
     margin: 5%;
 }
 
-form h2 {
+.form h2 {
     margin: 10% 5%;
     font-size: 34px;
 }
