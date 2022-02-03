@@ -49,35 +49,35 @@
     filter: invert(1);
 }
 
-ul {
+.nav ul {
     list-style-type: none;
     width: 100%;
     margin: 0;
     padding: 0;
 }
 
-ul > li:first-child {
+.nav ul > li:first-child {
     height: auto;
 }
 
-ul > li:first-child > p {
+.nav ul > li:first-child > p {
     width: 100%;
     margin: 10px 0;
 }
 
-ul > li {
+.nav ul > li {
     height: 50px;
     border-bottom: 1px solid black;
     padding-left: 5%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-} ul > li:hover {
+} .nav ul > li:hover {
     background-color: rgba(255,255,255,0.02);
 }
 
 
-ul > li > img {
+.nav ul > li > img {
     filter: invert(1);
     width: 24px;
     padding-right: 10px;
