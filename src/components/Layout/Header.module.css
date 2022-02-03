@@ -132,7 +132,7 @@ ul > li > a {
     }
 }
 
-@media screen and (max-height: 478px) {
+@media screen and (max-height: 550px) {
     .signOut {
         position: static;
     }
