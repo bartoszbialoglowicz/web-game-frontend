@@ -1,0 +1,23 @@
+.smallItemList {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 1053px) {
+    .smallItemList {
+        width: 100%;
+    }
+    .teamComp {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .smallItemList {
+        width: 100%;
+    }
+    .teamComp {
+        width: 100%;
+    }
+}

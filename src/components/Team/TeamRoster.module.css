@@ -1,0 +1,28 @@
+.teamComp {
+    width: 51%;
+    padding: 2%;
+}
+
+.traits,
+.teamChamp {
+    border: 1px solid rgba(0,0,0,0.4);
+    box-shadow: 0 0 20px rgba(0,0,0,0.4) inset;
+    width: 96%;
+    padding: 0 2%;
+}
+
+.teamChamps > div{
+    margin: 2% 0;
+}
+
+.teamChamp {
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width: 1053px) {
+    .teamComp {
+        width: 100%;
+    }
+}
