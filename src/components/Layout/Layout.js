@@ -13,6 +13,7 @@ import ResourcesContext from '../../store/resources-context';
 import { useState } from "react/cjs/react.development";
 import Content from "./Content";
 import { SERVER_URL } from "../../utils/Constant";
+import TeamPage from "../../pages/Home/Team";
 
 const Layout = () => {
     const [errors, setErrors] = useState(null);
@@ -21,7 +22,6 @@ const Layout = () => {
     const {error, sendRequest} = useHttp();
 
     const setResources = (data) => {
-        console.log(data);
         resourcesCtx.setCharacters(data[0].characters);
         resourcesCtx.setItems(data[0].items);
         resourcesCtx.setGold(data[0].gold);
@@ -52,6 +52,7 @@ const Layout = () => {
                     <Route path='collection' element={<Collection />}/>
                     <Route path='store' element={<StorePage />}/>
                     <Route path='quests' element={<Quests />}/>
+                    <Route path='team' element={<TeamPage />}/>
                 </Routes>
                 <Footer />
             </Content>
