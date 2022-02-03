@@ -14,6 +14,7 @@ const Item = props => {
     const [lock, setLock] = useState(false);
     const tier = classes[parseInt(props.item.tier)-1]
     const image = props.item.image ? <img src={props.item.image} alt="icon" /> : null;
+    const flexClasses = props.flexSmall === undefined ? 'item' : props.flexSmall;
 
     const addTraitHandler = () => {
         if (props.onClick !== undefined) {
@@ -26,7 +27,7 @@ const Item = props => {
 
     const cssLock = lock ? 'locked' : "";
 
-    return <div className={tier + ' ' + props.flexSmall + ' ' + cssLock} onClick={addTraitHandler}>
+    return <div className={tier + ' ' + flexClasses + ' ' + cssLock} onClick={addTraitHandler}>
         <div className='stats'>
             <h3>{props.item.name}</h3>
             <p>{props.item.power}</p>
