@@ -7,12 +7,26 @@ import damage from '../../assets/icons/damage.png';
 import health from '../../assets/icons/health.png';
 import crit from '../../assets/icons/crit.png';
 import percent from '../../assets/icons/percent.png';
+import { useState } from 'react/cjs/react.development';
 
 const Item = props => {
     const classes = ['common', 'rare', 'epic', 'mythic', 'legendary'];
+    const [lock, setLock] = useState(false);
     const tier = classes[parseInt(props.item.tier)-1]
     const image = props.item.image ? <img src={props.item.image} alt="icon" /> : null;
-    return <div className={tier + ' item'}>
+
+    const addTraitHandler = () => {
+        if (props.onClick !== undefined) {
+            props.onClick(props.item);
+        }
+        if (props.onLock === true) {
+            setLock(!lock);
+        }
+    }
+
+    const cssLock = lock ? 'locked' : "";
+
+    return <div className={tier + ' ' + props.flexSmall + ' ' + cssLock} onClick={addTraitHandler}>
         <div className='stats'>
             <h3>{props.item.name}</h3>
             <p>{props.item.power}</p>
