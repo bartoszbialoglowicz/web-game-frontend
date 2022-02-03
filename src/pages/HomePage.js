@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
 import AuthContext from "../store/auth-context"
 import { ResourcesContextProvider } from "../store/resources-context";
+import { TeamContextProvider }from "../store/team-context";
 
 const HomePage = () => {
     const authCtx = useContext(AuthContext);
@@ -13,7 +14,9 @@ const HomePage = () => {
     }
     
     return <ResourcesContextProvider>
-            <Layout />
+            <TeamContextProvider>
+                <Layout />
+            </TeamContextProvider>
         </ResourcesContextProvider>
 }
 
