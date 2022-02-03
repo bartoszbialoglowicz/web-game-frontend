@@ -8,6 +8,7 @@
     transition: .2s;
     outline: none;
     font-family: 'Playfair Display', serif;
+    cursor: pointer;
 }
 
 .formButton:focus,
