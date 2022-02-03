@@ -1,19 +1,20 @@
+import { useContext } from "react/cjs/react.development";
 import useResources from "../../hooks/use-resources";
+import ResourcesContext from "../../store/resources-context";
 import Button from "../UI/Button";
 import classes from './Chest.module.css';
 
 const Chest = props => {
     
     const {canAfford} = useResources();
+    const resCtx = useContext(ResourcesContext);
 
     const checkGold = async (event) => {
       event.preventDefault();
       if (canAfford(props.element.price)) {
         const res = await props.onSubmit(props.chances, props.element.quantity);
         if (res) {
-          console.log('Ok');
-        } else {
-          console.log('Dupa');
+          resCtx.addGold(-parseInt(props.element.price));
         }
       } else {
         console.log('Sorry');
