@@ -90,7 +90,7 @@ export const ResourcesContextProvider = (props) => {
     const addCharactersHandler = (data) => {
         const tmpNewChars = data.concat(characters);
         const dataToSet = getUniqueValues(tmpNewChars);
-        setCharacters(dataToSet);
+        setCharactersHandler(dataToSet);
     }
 
     const contextValue = {
