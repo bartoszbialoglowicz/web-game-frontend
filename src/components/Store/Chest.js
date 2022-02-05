@@ -12,12 +12,8 @@ const Chest = props => {
     const checkGold = async (event) => {
       event.preventDefault();
       if (canAfford(props.element.price)) {
-        const res = await props.onSubmit(props.chances, props.element.quantity);
-        if (res) {
-          resCtx.addGold(-parseInt(props.element.price));
-        }
-      } else {
-        console.log('Sorry');
+        resCtx.addGold(-parseInt(props.element.price));
+        props.onSubmit(props.chances, props.element.quantity);
       }
     }
 

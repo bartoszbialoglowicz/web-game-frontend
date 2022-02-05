@@ -25,7 +25,7 @@ const Store = () => {
 
   useEffect(() => {
     const url = SERVER_URL + 'api/resources/store/';
-    const url2 = SERVER_URL + 'api/resources/characters/'
+    const url2 = SERVER_URL + 'api/resources/characters/';
     const payload = {
       type: 'GET',
       token: authCtx.data.token
@@ -39,41 +39,13 @@ const Store = () => {
       event.preventDefault();
     }
     setShowOverlay(!showOverlay);
-  }
+  };
 
-  const sendRequestHandler = async (chances, quantity) => {
-    const url = SERVER_URL + `api/resources/resourcesupdate/${authCtx.data.id}/`;
-    const payload = {
-      type: 'PATCH',
-      token: authCtx.data.token
-    }
-    
-    const ctxChars = resourceCtx.characters;
+  const sendRequestHandler = (chances, quantity) => {
     const chestChars = getItems(chances, champs, quantity);
-    const dataToSend = resourceCtx.characters.map(item => item.id)
-                        .concat(chestChars.map(item => item.id));
     resourceCtx.addCharacters(chestChars);
-
-    const body = {
-      characters: dataToSend,
-      user: authCtx.data.id
-    };
-
-    /* Function return true or false (in case if response is invalid)
-       That prevents taking gold from user if there are some response errors */
-    let takeGold = null;
-    const er = (data) => {
-      resourceCtx.setCharacters(ctxChars);
-      takeGold = false;
-    }
-
-    const setChars = data => {
-      setDrop(chestChars);
-      showOverlayHandler(null);
-      takeGold = true;
-    }
-    await sendRequest(url, body, payload, setChars, er);
-    return takeGold;
+    setDrop(chestChars);
+    showOverlayHandler(null);
   };
 
   const storeItems = store.length > 0 ? 

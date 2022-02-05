@@ -21,15 +21,15 @@ const Layout = () => {
     const resourcesCtx = useContext(ResourcesContext);
     const {error, sendRequest} = useHttp();
 
-    const setResources = (data) => {
-        resourcesCtx.setCharacters(data[0].characters);
-        resourcesCtx.setItems(data[0].items);
-        resourcesCtx.setGold(data[0].gold);
-        resourcesCtx.setExperience(data[0].experience);
-        resourcesCtx.setLvl(data[0].lvl);
-    }
-
     useEffect(() => {
+        const setResources = (data) => {
+            resourcesCtx.setCharacters(data[0].characters);
+            resourcesCtx.setItems(data[0].items);
+            resourcesCtx.setGold(data[0].gold);
+            resourcesCtx.setExperience(data[0].experience);
+            resourcesCtx.setLvl(data[0].lvl);
+        }
+
         const payload = {
             type: 'GET',
             token: authCtx.data.token
@@ -41,6 +41,30 @@ const Layout = () => {
         const url = SERVER_URL + 'api/resources/userresources/';
         sendRequest(url, null, payload, setResources, errors);
     }, []);
+
+    useEffect(() => {
+        const url = SERVER_URL + `api/resources/resourcesupdate/${authCtx.data.id}/`;
+        const payload = {
+          type: 'PATCH',
+          token: authCtx.data.token
+        }
+    
+        const bodyCharacters = resourcesCtx.characters.map(char => char.id);
+        const bodyItems = resourcesCtx.items.map(item => item.id);
+    
+        const body = {
+          characters: bodyCharacters,
+          items: bodyItems,
+          gold: resourcesCtx.gold,
+          experience: resourcesCtx.experience,
+          lvl: resourcesCtx.lvl
+        };
+    
+        const fn = (data) => {};
+        const er = (er) => {};
+    
+        sendRequest(url, body, payload, fn, er);
+      }, [resourcesCtx]);
 
     return (
         <Fragment>
