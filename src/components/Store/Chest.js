@@ -2,6 +2,7 @@ import { useContext } from "react/cjs/react.development";
 import useResources from "../../hooks/use-resources";
 import ResourcesContext from "../../store/resources-context";
 import Button from "../UI/Button";
+import Card from "../UI/Card";
 import classes from './Chest.module.css';
 
 const Chest = props => {
@@ -17,7 +18,8 @@ const Chest = props => {
       }
     }
 
-    return <div key={props.element.id} className={classes.chest}>
+    return <Card>
+      <div key={props.element.id} className={classes.chest}>
           <p>{props.element.name}</p>
           <p>Cost: {props.element.price === 0 ? 'Free' : props.element.price}</p>
           <form className={classes.chestForm} onSubmit={checkGold}>
@@ -27,6 +29,7 @@ const Chest = props => {
             />
           </form>
         </div>
+    </Card>
 };
 
 export default Chest;

@@ -4,6 +4,7 @@ import classes from './TeamRoster.module.css';
 import Item from '../Collection/Item';
 import Button from '../UI/Button';
 import TeamContext from '../../store/team-context';
+import Card from '../UI/Card';
 
 
 const TeamRoster = (props) => {
@@ -14,7 +15,7 @@ const TeamRoster = (props) => {
 
     const characterList = props.characters.map((champ, index) => {
         return champ === null ? 
-        <div className={classes.teamChamp} key={index}>Empty slot</div> : 
+        <Card className={classes.teamChamp} key={index}>Empty slot</Card> : 
         //<div className={classes.teamChamp} onClick={() => props.onRemove(props.characters[index])} key={index}><Item flexSmall='small-item' item={champ}/></div>
         <Item flexSmall='small-item' item={champ} key={index}/>
     })
@@ -26,11 +27,11 @@ const TeamRoster = (props) => {
 
     return (
         <div className={classes.teamComp}>
-            <div className={classes.traits}>
+            <Card className={classes.traits}>
                 <h3>Active traits</h3>
                 { traitsList.length > 0 && traitsList}
                 { traitsList.length === 0 && <p>No active traits</p>}
-            </div>
+            </Card>
             <div className={classes.teamChamps}>
                 {characterList}
             </div>

@@ -46,6 +46,7 @@ const Header = () => {
                         <li><img src={store} alt='store' /><Link to={'store'}>Store</Link></li>
                         <li><img src={team} alt='team' /><Link to={'team'}>Team</Link></li>
                         <li><img src={collection} alt='collection' /><Link to={'collection'}>Collection</Link></li>
+                        <li><img src={collection} alt='locations' /><Link to={'locations'}>Locations</Link></li>
                         <li className={classes.signOut} onClick={logoutHandler}><img src={signOut} alt='signout'/><p>Sign Out</p></li>
                     </ul>
                 </div>

@@ -14,6 +14,7 @@ import Content from "./Content";
 import { SERVER_URL } from "../../utils/Constant";
 import TeamPage from "../../pages/Home/Team";
 import QuestsPage from "../../pages/Home/Quests";
+import LocationPage from "../../pages/Home/Locations";
 
 const Layout = () => {
     const [errors, setErrors] = useState(null);
@@ -77,6 +78,7 @@ const Layout = () => {
                     <Route path='store' element={<StorePage />}/>
                     <Route path='quests' element={<QuestsPage />}/>
                     <Route path='team' element={<TeamPage />}/>
+                    <Route path='locations' element={<LocationPage />} />
                 </Routes>
                 <Footer />
             </Content>

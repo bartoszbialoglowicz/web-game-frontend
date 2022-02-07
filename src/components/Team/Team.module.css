@@ -1,7 +1,7 @@
 .smallItemList {
     width: 40%;
-    display: flex;
-    justify-content: center;
+} .smallItemList h1 {
+    margin: 10px;
 }
 
 @media screen and (max-width: 1053px) {
