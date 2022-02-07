@@ -132,7 +132,7 @@ ul > li > a {
     }
 }
 
-@media screen and (max-height: 550px) {
+@media only screen and (orientation: portrait){
     .signOut {
         position: static;
     }
