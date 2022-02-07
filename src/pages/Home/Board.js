@@ -1,7 +1,8 @@
 import React from 'react';
+import Home from '../../components/Home/Home';
 
 const Board = () => {
-  return <div>Welcome to the demo game.</div>;
+  return <Home />
 };
 
 export default Board;

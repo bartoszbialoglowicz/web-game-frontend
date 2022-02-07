@@ -4,7 +4,6 @@ import Footer from "./Footer";
 import Header from "./Header";
 
 import Collection from "../../pages/Home/Collection";
-import Quests from '../../pages/Home/Quests';
 import StorePage from "../../pages/Home/Store";
 import Board from '../../pages/Home/Board';
 import useHttp from '../../hooks/use-http';
@@ -14,6 +13,7 @@ import { useState } from "react/cjs/react.development";
 import Content from "./Content";
 import { SERVER_URL } from "../../utils/Constant";
 import TeamPage from "../../pages/Home/Team";
+import QuestsPage from "../../pages/Home/Quests";
 
 const Layout = () => {
     const [errors, setErrors] = useState(null);
@@ -75,7 +75,7 @@ const Layout = () => {
                     <Route index element={<Board />}/>
                     <Route path='collection' element={<Collection />}/>
                     <Route path='store' element={<StorePage />}/>
-                    <Route path='quests' element={<Quests />}/>
+                    <Route path='quests' element={<QuestsPage />}/>
                     <Route path='team' element={<TeamPage />}/>
                 </Routes>
                 <Footer />
