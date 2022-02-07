@@ -1,7 +1,8 @@
 import React from 'react';
+import Quests from '../../components/Quest/Quests';
 
-const Quests = () => {
-  return <div>Quests</div>;
+const QuestsPage = () => {
+  return <Quests />
 };
 
-export default Quests;
+export default QuestsPage;
