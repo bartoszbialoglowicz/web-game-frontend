@@ -1,6 +1,7 @@
 # Important
 For the correct operation of the application, it is necessary to start the database application:
 https://github.com/bartoszbialoglowicz/web-game-api
+You also need to change address here: https://github.com/bartoszbialoglowicz/web-game-frontend/blob/master/src/utils/Constant.js#:~:text=export%20const%20SERVER_URL%20%3D%20%27http%3A//192.168.0.66%3A8000/%27%3B
 
 # Getting Started with Create React App
 
