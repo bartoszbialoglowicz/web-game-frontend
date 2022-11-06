@@ -1,3 +1,7 @@
+# Important
+For the correct operation of the application, it is necessary to start the database application:
+https://github.com/bartoszbialoglowicz/web-game-api
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
